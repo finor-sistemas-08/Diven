@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "525306500701",
+    "project_id": "divenflutter",
+    "storage_bucket": "divenflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525306500701:android:4df3cf4a7edb08bd3f5fb4",
+        "android_client_info": {
+          "package_name": "com.example.diven_market"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525306500701-8os23j3u2utsoejpn9is29nu473rffbi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqJ8kjxPr5X3GOQb8CDCgLfbwsKfTFWDM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525306500701-8os23j3u2utsoejpn9is29nu473rffbi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

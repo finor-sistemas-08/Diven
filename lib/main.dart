@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+//Cloud Firestore Plugin para Flutter 
+//import 'package:cloud_firestore/cloud_firestore.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -43,7 +46,7 @@ Widget cuerpo() {
 //Widget para el título de "Iniciar Sesión"
 Widget nombre() {
   return Text(
-    "Inicie Sesión",
+    "Diven Market",
     style: TextStyle(
         color: Colors.cyan[50], 
         fontSize: 31.0, 
