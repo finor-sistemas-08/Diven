@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-//Cloud Firestore Plugin para Flutter 
-//import 'package:cloud_firestore/cloud_firestore.dart';
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
+  //runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,6 +18,44 @@ class MyApp extends StatelessWidget {
         //El diseño del Login se carga de esta manera
         body: cuerpo(),
       ),
+    );
+  }
+}
+
+class MyApp extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      title: 'Flutter Firebase',
+      home: Scaffold(
+        appBar: AppBar(title: Text('Conectando a Firebase'),),
+        body: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection('usuarios').snapshots(),            
+          builder: (context, snapshot) { 
+            
+            //Si no tenemos datos
+            if(!snapshot.hasData){
+              return Center(
+                child: CircularProgressIndicator(),
+                );
+            }
+            
+            //Si tenemos datos
+            List<DocumentSnapshot> docs = snapshot.data.docs;
+            return Container(
+              child: ListView.builder(
+                itemCount: docs.length,
+                itemBuilder: (_,i){
+                  Map<String, dynamic> data = docs[i].data();
+                  print('___');
+                  print(data);
+                  return ListTile(title: Text(data['ci']));
+                }
+                ),
+              );
+           },
+          )
+      )
     );
   }
 }
