@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:diven_market/pages/usuarios.dart';
+//import 'package:diven_market/pages/consultas.dart';
 import 'package:diven_market/pages/principal.dart';
 
 class Login extends StatelessWidget {
@@ -101,7 +102,6 @@ Widget botonCrearCuenta(BuildContext context) {
     child: Text("Crear Cuenta", style: TextStyle(fontSize: 18, color: Colors.white),),
     );
 }
-
 
 // class Persona{
 //   String _id_persona;

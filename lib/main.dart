@@ -5,8 +5,8 @@ import 'package:firebase_core/firebase_core.dart';
 //Las páginas o vistas que tendrá mi app
 import 'package:diven_market/pages/login.dart';
 import 'package:diven_market/pages/usuarios.dart';
-import 'package:diven_market/pages/consultas.dart';
 import 'package:diven_market/pages/principal.dart';
+import 'package:diven_market/pages/consultas.dart';
 
 //import 'package:firebase_auth/firebase_auth.dart'
 
@@ -33,4 +33,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//La clase que se encarga de consultas de la base de datos de firebase
