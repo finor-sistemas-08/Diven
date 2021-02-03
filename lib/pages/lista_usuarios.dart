@@ -9,44 +9,7 @@ class Listausuarios extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold( 
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-          onPressed: (){
-            Navigator.pushNamed(context, Consultar.ROUTE);
-          },
-        ),     
-      appBar: AppBar(
-        title: Text("Listado de usuarios"),
-      ),
-      body: Container(
-        // decoration: BoxDecoration(
-        //     image: DecorationImage(
-        //         image:
-        //             NetworkImage("https://wallpapercave.com/wp/wp2873698.png"),
-        //         fit: BoxFit.cover
-        //   )
-        // ),
-        //child: _MyList(),
-        child: _MyList(),
-        // Column(
-        //   children: [
-        //     //_MyList(),
-        //     FlatButton(
-        //       color: Colors.teal[700],
-        //       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        //       onPressed: () {
-        //         _MyList();
-        //       },
-        //       child: Text(
-        //         "Actualizar",
-        //         style: TextStyle(fontSize: 18, color: Colors.white),
-        //       ),            
-        //     )
-        //   ],
-        // ),
-      ),
-    );
+    return _MyList();
   }
 }
 
@@ -67,16 +30,37 @@ class __MyListState extends State<_MyList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: persona.length,
-      itemBuilder: (_, i) => _createItem(i),
-    );
+    return Scaffold( 
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+          onPressed: (){
+            Navigator.pushNamed(context, Consultar.ROUTE, arguments: Persona.empty()).then((value) => setState((){
+              _loadData();
+            }));
+          },
+        ),     
+      appBar: AppBar(
+        title: Text("Listado de usuarios"),
+      ),
+      body: Container(
+        // decoration: BoxDecoration(
+        //     image: DecorationImage(
+        //         image:
+        //             NetworkImage("https://wallpapercave.com/wp/wp2873698.png"),
+        //         fit: BoxFit.cover
+        //   )
+        // ),
+        child: ListView.builder(
+                itemCount: persona.length,
+                itemBuilder: (_, i) => _createItem(i),
+              )       
+      ),
+    );      
   }
 
   //Carga datos de los usuarios
   _loadData() async {
     List<Persona> auxNote = await Operation.persona();
-
     setState(() {
       persona = auxNote;
       }
@@ -101,11 +85,18 @@ class __MyListState extends State<_MyList> {
       },     
       child: ListTile(
         title: Text(persona[i].nombre),
-        // trailing: MaterialButton(
-        //   onPressed: (){
-        //     Navigator.pushNamed(context, Consultar.ROUTE,arguments: persona[i]);
-        //   },
-        //   child: Icon(Icons.edit)),
+        trailing: 
+          MaterialButton(
+            onPressed: (){
+              Navigator.pushNamed(
+                context, 
+                Consultar.ROUTE, 
+                arguments: persona[i]).then((value) => setState((){
+                  _loadData();
+                }));
+            },
+            child: Icon(Icons.edit)
+          ),
       ),
     );
   }

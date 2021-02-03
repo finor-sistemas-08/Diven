@@ -1,11 +1,11 @@
 class Persona {
-  final int id;
-  final String nombre;
-  final String paterno;
-  final String materno;
-  final String fechaNac;
-  final String genero;
-  final String correo;  
+   int id;
+   String nombre;
+   String paterno;
+   String materno;
+   String fechaNac;
+   String genero;
+   String correo;  
 
   Persona(
     {this.id,
@@ -16,6 +16,8 @@ class Persona {
     this.genero,
     this.correo
       });
+
+  Persona.empty();
 
   Map<String, dynamic> toMap() {
     return {

@@ -6,208 +6,253 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 //import 'package:firebase_core/firebase_core.dart';
 
-class Consultar extends StatelessWidget {    
-
+class Consultar extends StatefulWidget {
   //const CrearCuenta({Key key}) : super(key: key);
   static const String ROUTE = "/Crud";
+
+  @override
+  _ConsultarState createState() => _ConsultarState();
+}
+
+class _ConsultarState extends State<Consultar> {
+  final _formKey = GlobalKey<FormState>();
+
+  final nombreController = TextEditingController();
+  final paternoController = TextEditingController();
+  final maternoController = TextEditingController();
+  final fechaNacController = TextEditingController();
+  final generoController = TextEditingController();
+  final correoController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    
-    //Persona persona = ModalRoute.of(context).settings.arguments;
+    Persona persona = ModalRoute.of(context).settings.arguments;
     //Operation.persona();
-    
-    return Scaffold(      
-      appBar: AppBar(
-        title: Text("Añadir usuarios"),
+    _init(persona);
+
+    return WillPopScope(
+      onWillPop: _onWillPopScope,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Añadir usuarios"),
         ),
-      body: Container(
-        
-        decoration: BoxDecoration(
-          //color: Colors.teal[900]
-            image: DecorationImage(
-                image:
-                    NetworkImage("https://wallpapercave.com/wp/wp2873698.png"),
-                fit: BoxFit.cover
-             )
-        ),
-        child: _FormSave() //ConsultaFirebase(),     
+        body: Container(
+            decoration: BoxDecoration(
+                //color: Colors.teal[900]
+                image: DecorationImage(
+                    image: NetworkImage(
+                        "https://wallpapercave.com/wp/wp2873698.png"),
+                    fit: BoxFit.cover)),
+            child: _bluidform(persona) //ConsultaFirebase(),
+            ),
       ),
     );
   }
-}
 
-class _FormSave extends StatelessWidget {
-  
-  final _formKey = GlobalKey<FormState>();
-  final nombreController =TextEditingController();
-  final paternoController =TextEditingController();
-  final maternoController =TextEditingController();
-  final fechaNacController =TextEditingController();
-  final generoController =TextEditingController();
-  final correoController =TextEditingController();
+  _init(Persona persona) {
+    nombreController.text = persona.nombre;
+    paternoController.text = persona.paterno;
+    maternoController.text = persona.materno;
+    fechaNacController.text = persona.fechaNac;
+    generoController.text = persona.genero;
+    correoController.text = persona.correo;
+  }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _bluidform(Persona persona) {
     return Form(
-      key: _formKey,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget> [
-            
-            SizedBox(height: 10,),
-            
-            TextFormField(
-              controller: nombreController,
-              validator: (value) {
-                if(value.isEmpty) {
-                  return "tiene que colocar datos";
-                }
-                return null;
-              },
-              decoration: InputDecoration(                     
-                labelText: "Nombre",              
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                  ),                   
-                  fillColor: Colors.white,
-                  filled: true,
-              ),                 
-            ),
-
-            SizedBox(height: 10,),
-            
-            TextFormField(
-              controller: paternoController,
-              validator: (value) {
-                if(value.isEmpty) {
-                  return "tiene que colocar datos";
-                }
-                return null;
-              },
-              decoration: InputDecoration(                     
-                labelText: "Apellido paterno",              
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                  ),                   
-                  fillColor: Colors.white,
-                  filled: true,
-              ),                 
-            ),
-            
-            SizedBox(height: 10,),
-            
-            TextFormField(
-              controller: maternoController,
-              validator: (value) {
-                if(value.isEmpty) {
-                  return "tiene que colocar datos";
-                }
-                return null;
-              },
-              decoration: InputDecoration(                     
-                labelText: "Apellido materno",              
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                  ),                   
-                  fillColor: Colors.white,
-                  filled: true,
-              ),                 
-            ),
-            
-            SizedBox(height: 10,), 
-            
-            TextFormField(
-              controller: fechaNacController,
-              validator: (value) {
-                if(value.isEmpty) {
-                  return "tiene que colocar datos";
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                labelText: "Fecha de nacimiento",
-                border: OutlineInputBorder(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: nombreController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "tiene que colocar datos";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  labelText: "Nombre",
+                  border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                   ),
-                fillColor: Colors.white,
-                filled: true,
+                  fillColor: Colors.white,
+                  filled: true,
+                ),
               ),
-            ),
-            
-            SizedBox(height: 10,),
-            
-            TextFormField(
-              controller: generoController,
-              validator: (value) {
-                if(value.isEmpty) {
-                  return "tiene que colocar datos";
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                labelText: "Género",
-                border: OutlineInputBorder(
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: paternoController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "tiene que colocar datos";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  labelText: "Apellido paterno",
+                  border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                   ),
-                fillColor: Colors.white,
-                filled: true,
+                  fillColor: Colors.white,
+                  filled: true,
+                ),
               ),
-            ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: maternoController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "tiene que colocar datos";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  labelText: "Apellido materno",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                  fillColor: Colors.white,
+                  filled: true,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: fechaNacController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "tiene que colocar datos";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  labelText: "Fecha de nacimiento",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                  fillColor: Colors.white,
+                  filled: true,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: generoController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "tiene que colocar datos";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  labelText: "Género",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                  fillColor: Colors.white,
+                  filled: true,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: correoController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "tiene que colocar datos";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  labelText: "Correo",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                  fillColor: Colors.white,
+                  filled: true,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              RaisedButton(
+                  child: Text("Listar usuarios en consola"),
+                  onPressed: () {
+                    Operation.persona();
+                  }),
+              SizedBox(
+                height: 10,
+              ),
+              RaisedButton(
+                  child: Text("Guardar usuario"),
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      if (persona.id != null) {
+                        //Actualización
+                        persona.nombre = nombreController.text;
+                        persona.paterno = paternoController.text;
+                        persona.materno = maternoController.text;
+                        persona.fechaNac = fechaNacController.text;
+                        persona.genero = generoController.text;
+                        persona.correo = correoController.text;
+                        Operation.update(persona);
+                      } else {
+                        //inserción
                         
-            SizedBox(height: 10,),
-            
-            TextFormField(
-              controller: correoController,
-              validator: (value) {
-                if(value.isEmpty) {
-                  return "tiene que colocar datos";
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                labelText: "Correo",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                  ),
-                fillColor: Colors.white,
-                filled: true,
-              ),
-            ),
-            
-            SizedBox(height: 10,),
+                        //Para insertar a firebase
+                        // FirebaseFirestore.instance.collection('persona').add({
+                        //   "nombre" : nombreController.text,
+                        //   }
+                        // );
+                        
+                        Operation.insert(Persona(
+                                nombre: nombreController.text,
+                                paterno: paternoController.text,
+                                materno: maternoController.text,
+                                fechaNac: fechaNacController.text,
+                                genero: generoController.text,
+                                correo: correoController.text)
 
-            RaisedButton(
-              child: Text("Listar usuarios en consola"),
-              onPressed: (){
-                Operation.persona();
-              }
-            ),
+                            //print("Guardar" + nombreController.text);
+                            );
+                      }
+                    }
+                  })
+            ],
+          ),
+        ));
+  }
 
-            SizedBox(height: 10,),
-
-            RaisedButton(
-              child: Text("Guardar usuario"),
-              onPressed: (){
-                if(_formKey.currentState.validate()){                  
-                  print("Guardar" + nombreController.text);
-                  Operation.insert(
-                    Persona(
-                      nombre: nombreController.text,
-                      paterno: paternoController.text,
-                      materno: maternoController.text,
-                      fechaNac: fechaNacController.text,
-                      genero: generoController.text,                      
-                      correo: correoController.text
-                    )
-                  );
-                }
-              },
-            ),
-         ],
-        ),
-      )
-    );    
+  Future<bool> _onWillPopScope() {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text("¿Seguro que quieres volver atrás?"),
+              content: Text("Tienes datos sin guardar"),
+              actions: [
+                FlatButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: Text("No"),
+                ),
+                FlatButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: Text("Yes"),
+                ),
+              ],
+            ));
   }
 }
 
@@ -249,18 +294,18 @@ class ConsultaFirebase extends StatelessWidget {
   }
 }
 
-Widget consultarUsuarios() {
-  return FlatButton(
-    color: Colors.teal[700],
-    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-    onPressed: () {
-      // Widget Mostrar(){
-      //   child: ConsultaFirebase()
-      // };
-    },
-    child: Text(
-      "Mostrar usuarios actuales",
-      style: TextStyle(fontSize: 18, color: Colors.white),
-    ),
-  );
-}
+// Widget consultarUsuarios() {
+//   return FlatButton(
+//     color: Colors.teal[700],
+//     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+//     onPressed: () {
+//       // Widget Mostrar(){
+//       //   child: ConsultaFirebase()
+//       // };
+//     },
+//     child: Text(
+//       "Mostrar usuarios actuales",
+//       style: TextStyle(fontSize: 18, color: Colors.white),
+//     ),
+//   );
+// }
