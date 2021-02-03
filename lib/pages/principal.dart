@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:diven_market/pages/consultas.dart';
+//import 'package:diven_market/pages/crud.dart';
+
+import 'package:diven_market/pages/lista_usuarios.dart';
 
 class Principal extends StatelessWidget {
   //const CrearCuenta({Key key}) : super(key: key);
@@ -34,10 +36,10 @@ Widget consultarUsuarios(BuildContext context) {
     color: Colors.teal[700],
     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
     onPressed: () {
-      Navigator.pushNamed(context, Consultar.ROUTE);
+      Navigator.pushNamed(context, Listausuarios.ROUTE);
     },
     child: Text(
-      "Consultas de datos",
+      "Lista de usuarios",
       style: TextStyle(fontSize: 18, color: Colors.white),
     ),
   );

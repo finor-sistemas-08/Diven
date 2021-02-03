@@ -23,16 +23,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   #Cloud Firestore Plugin para Flutter
   cloud_firestore: ^0.16.0
   firebase_core: ^0.7.0
   
+  #Lo necesario para el login con google, etc
   google_sign_in: ^4.5.9
   firebase_auth: ^0.20.0+1
-  
   flutter_bloc: ^6.1.1
   equatable: ^1.2.5
   
+  #Para usar SQLite
+  sqflite:
+  path:
+
   meta: ^1.2.4
 
   # The following adds the Cupertino Icons font to your application.

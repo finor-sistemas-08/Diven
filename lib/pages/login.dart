@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:firebase_core/firebase_core.dart';
 
-import 'package:diven_market/pages/usuarios.dart';
+//Las páginas o vistas que tendrá mi app
+import 'package:diven_market/pages/crear_cuenta.dart';
 //import 'package:diven_market/pages/consultas.dart';
 import 'package:diven_market/pages/principal.dart';
 
@@ -86,6 +89,14 @@ Widget botonEntrar(BuildContext context){
     color: Colors.cyan[900],
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
     onPressed: (){
+    //   List<DocumentSnapshot> documentList = (await FirebaseFirestore.instance
+    //      .collection("cases")
+    //      .document(await firestoreProvider.getUid())
+    //      .collection(caseCategory)
+    //      .where("caseNumber", arrayContains: query)
+    //      .getDocuments())
+    //  .documents;
+      
       Navigator.pushNamed(context, Principal.ROUTE);
     },
     child: Text("Entrar", style: TextStyle(fontSize: 18, color: Colors.white))
@@ -102,16 +113,4 @@ Widget botonCrearCuenta(BuildContext context) {
     child: Text("Crear Cuenta", style: TextStyle(fontSize: 18, color: Colors.white),),
     );
 }
-
-// class Persona{
-//   String _id_persona;
-//   String _nombre;
-//   String _paterno;
-//   String _materno;
-//   String _fecha_nac;
-//   String _genero;
-//   String _correo;
-// }
-
-
 
