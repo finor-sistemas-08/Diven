@@ -8,6 +8,7 @@ import 'package:diven_market/pages/login.dart';
 import 'package:diven_market/pages/crear_cuenta.dart';
 import 'package:diven_market/pages/principal.dart';
 import 'package:diven_market/pages/crud.dart';
+import 'package:diven_market/screens/home/home_screen.dart';
 
 //import 'package:firebase_auth/firebase_auth.dart'
 
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/Crud' : (_) => Consultar(),
         '/Principal' : (_) => Principal(),
         '/Lista_users' : (_) => Listausuarios(),
+        '/HomeScreen' : (_) => HomeScreen(),
       },      
     );          
   }

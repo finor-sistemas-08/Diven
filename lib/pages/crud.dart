@@ -201,7 +201,7 @@ class _ConsultarState extends State<Consultar> {
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
                       if (persona.id != null) {
-                        //Actualización
+                        //Actualización en SQLite
                         persona.nombre = nombreController.text;
                         persona.paterno = paternoController.text;
                         persona.materno = maternoController.text;
@@ -210,14 +210,20 @@ class _ConsultarState extends State<Consultar> {
                         persona.correo = correoController.text;
                         Operation.update(persona);
                       } else {
-                        //inserción
                         
+                        //INSERCIÓN                        
                         //Para insertar a firebase
-                        // FirebaseFirestore.instance.collection('persona').add({
-                        //   "nombre" : nombreController.text,
-                        //   }
-                        // );
+                        FirebaseFirestore.instance.collection('persona').add({
+                          "nombre" : nombreController.text,
+                          "paterno" : paternoController.text,
+                          "materno" : maternoController.text,
+                          "fecha_nac" : fechaNacController.text,
+                          "genero" : generoController.text,
+                          "correo" : correoController.text,
+                          }
+                        );
                         
+                        //Inserción en SQLite
                         Operation.insert(Persona(
                                 nombre: nombreController.text,
                                 paterno: paternoController.text,
@@ -225,9 +231,8 @@ class _ConsultarState extends State<Consultar> {
                                 fechaNac: fechaNacController.text,
                                 genero: generoController.text,
                                 correo: correoController.text)
-
                             //print("Guardar" + nombreController.text);
-                            );
+                          );
                       }
                     }
                   })
