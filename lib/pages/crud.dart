@@ -68,6 +68,7 @@ class _ConsultarState extends State<Consultar> {
               SizedBox(
                 height: 10,
               ),
+              
               TextFormField(
                 controller: nombreController,
                 validator: (value) {
@@ -85,6 +86,7 @@ class _ConsultarState extends State<Consultar> {
                   filled: true,
                 ),
               ),
+
               SizedBox(
                 height: 10,
               ),
@@ -213,7 +215,7 @@ class _ConsultarState extends State<Consultar> {
                         
                         //INSERCIÓN                        
                         //Para insertar a firebase
-                        FirebaseFirestore.instance.collection('persona').add({
+                        FirebaseFirestore.instance.collection('persona').add({                          
                           "nombre" : nombreController.text,
                           "paterno" : paternoController.text,
                           "materno" : maternoController.text,
@@ -298,19 +300,3 @@ class ConsultaFirebase extends StatelessWidget {
     );
   }
 }
-
-// Widget consultarUsuarios() {
-//   return FlatButton(
-//     color: Colors.teal[700],
-//     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-//     onPressed: () {
-//       // Widget Mostrar(){
-//       //   child: ConsultaFirebase()
-//       // };
-//     },
-//     child: Text(
-//       "Mostrar usuarios actuales",
-//       style: TextStyle(fontSize: 18, color: Colors.white),
-//     ),
-//   );
-// }

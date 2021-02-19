@@ -1,39 +1,72 @@
+import 'package:diven_market/models/usuario.dart';
 import 'package:flutter/material.dart';
+import 'package:diven_market/bd/crudFlutterFire.dart';
+  
+String coleccion = "usuarios";
+Map<String, dynamic> documento;
+
+//Variables que van a robar los valores de los TextField
+final nameController = TextEditingController();
+final passwordController = TextEditingController();
+final mailController = TextEditingController();
 
 class CrearCuenta extends StatelessWidget {
-  //const CrearCuenta({Key key}) : super(key: key);
+
+  //const CrearCuenta({Key key}) : super(key: key);  
+  
   static const String ROUTE = "/CrearCuenta";
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Text("Crear nueva cuenta de usuario"),
-      ),
-      body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage("https://wallpapercave.com/wp/wp2873698.png"),
-                fit: BoxFit.cover
-            )
+
+    //Recibimos como parámetro de entrada un ¡objeto de la clase Usuario y lo guardamos en otro llamado "usuario"
+    //Usuario usuario = ModalRoute.of(context).settings.arguments;
+    
+    //Guardamos los valores de las variables locales en el objeto de la clase Usuario
+   // _init(documento);
+        
+        return Scaffold(
+          appBar: AppBar(
+              title: Text("Crear nueva cuenta de usuario"),
           ),
-          child: Center(
-            child: ListView(
-              children: <Widget> [
-                nombre(),
-                campoNombre(),
-                contrasena(),
-                campoContrasena(),
-                contrasena2(),
-                campoContrasena2(),
-                SizedBox(height: 7),
-                botonCrear(),
-              ],
-            ),
-          ),
-      ),            
-    );
+          body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage("https://wallpapercave.com/wp/wp2873698.png"),
+                    fit: BoxFit.cover
+                )
+              ),
+              child: Center(
+                child: ListView(
+                  children: <Widget> [
+                    nombre(),
+                    campoNombre(),
+
+                    correo(),
+                    campoCorreo(),
+
+                    contrasena(),
+                    campoContrasena(),
+
+                    contrasena2(),
+                    campoContrasena2(),
+
+                    SizedBox(height: 7),
+                    botonCrear(),
+                  ],
+                ),
+              ),
+          ),            
+        );
+    }
   }
-}
+  
+// _init(Usuario usuario) {
+//   nameController.text = usuario.name;
+//   passwordController.text = usuario.password;
+//   mailController.text = usuario.mail;
+// } 
+    
 
 Widget nombre(){
   return Text(
@@ -51,6 +84,7 @@ Widget campoNombre(){
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 7),
     child: TextField(
+      controller: nameController,    
       decoration: InputDecoration(
         fillColor: Colors.white,
         filled: true,
@@ -59,6 +93,30 @@ Widget campoNombre(){
   );
 }
 
+Widget correo(){
+  return Text(
+    "Inserte un correo",
+    style: TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+      height: 2,    
+      ),
+  );
+}
+
+Widget campoCorreo(){
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 7),
+    child: TextField(
+      controller: mailController,            
+      decoration: InputDecoration(
+        fillColor: Colors.white,
+        filled: true,
+        ),
+    ),
+  );
+}
 
 Widget contrasena(){
   return Text(
@@ -76,6 +134,7 @@ Widget campoContrasena(){
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 7),
     child: TextField(
+        controller: passwordController,
         obscureText: true,      
         decoration: InputDecoration(
         fillColor: Colors.white,
@@ -101,6 +160,7 @@ Widget campoContrasena2(){
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 7),
     child: TextField(
+        //controller: passwordController,
         obscureText: true,      
         decoration: InputDecoration(
         fillColor: Colors.white,
@@ -114,7 +174,21 @@ Widget botonCrear(){
   return FlatButton(
     color: Colors.cyan[900],
     padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-    onPressed: (){
+    onPressed: () async{      
+      
+      if(nameController.text != "" && passwordController.text != "" && mailController.text != ""){        
+        documento = {
+          "nombre" : nameController.text,
+          "password" : passwordController.text,
+          "correo" : mailController.text
+        };
+        
+        await CrudFirestore().create(coleccion, documento);
+        print("Se ha logrado insertar los datos");
+      }
+      else{
+        print("No hay datos, debe ingresar información");
+      }
     },
     child: Text("Crear", style: TextStyle(fontSize: 18, color: Colors.white))
   );  

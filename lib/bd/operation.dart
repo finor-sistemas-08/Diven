@@ -3,6 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class Operation{
+  
   static Future<Database> _openDB() async{
     return openDatabase(
       join(await getDatabasesPath(),'persona.db'),

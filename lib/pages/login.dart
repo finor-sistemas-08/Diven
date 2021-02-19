@@ -1,4 +1,5 @@
 
+import 'package:diven_market/models/usuario.dart';
 import 'package:flutter/material.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:firebase_core/firebase_core.dart';
@@ -8,10 +9,15 @@ import 'package:diven_market/pages/crear_cuenta.dart';
 //import 'package:diven_market/pages/consultas.dart';
 import 'package:diven_market/pages/principal.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
 
   static const String ROUTE = "/";
 
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,13 +95,6 @@ Widget botonEntrar(BuildContext context){
     color: Colors.cyan[900],
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
     onPressed: (){
-    //   List<DocumentSnapshot> documentList = (await FirebaseFirestore.instance
-    //      .collection("cases")
-    //      .document(await firestoreProvider.getUid())
-    //      .collection(caseCategory)
-    //      .where("caseNumber", arrayContains: query)
-    //      .getDocuments())
-    //  .documents;
       
       Navigator.pushNamed(context, Principal.ROUTE);
     },
@@ -109,6 +108,9 @@ Widget botonCrearCuenta(BuildContext context) {
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
     onPressed: (){
       Navigator.pushNamed(context, CrearCuenta.ROUTE);
+      //Navigator.pushNamed(context, CrearCuenta.ROUTE, arguments: Usuario.empty()).then((value) => setState((){
+        
+      // }));
     },
     child: Text("Crear Cuenta", style: TextStyle(fontSize: 18, color: Colors.white),),
     );
