@@ -26,27 +26,27 @@ class Body extends StatelessWidget {
         ),
         Categorias(),
         Expanded(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-          child: GridView.builder(
-            itemCount: productos.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.75,
-              mainAxisSpacing: kDefaultPaddin,
-              crossAxisSpacing: kDefaultPaddin,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+            child: GridView.builder(
+              itemCount: productos.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.75,
+                mainAxisSpacing: kDefaultPaddin,
+                crossAxisSpacing: kDefaultPaddin,
+              ),
+              itemBuilder: (context, index) => ItemCard(
+                product: productos[index],
+                press: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailsScreen(
+                        product: productos[index],
+                      ),
+                    )),
+              ),
             ),
-            itemBuilder: (context, index) => ItemCard(
-              product: productos[index],
-              press: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailsScreen(
-                      product: productos[index],
-                    ),
-                  )),
-            ),
-          ),
         )),
       ],
     );

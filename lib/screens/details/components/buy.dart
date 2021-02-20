@@ -2,8 +2,8 @@ import 'package:diven_market/models/producto.dart';
 import 'package:flutter/material.dart';
 
 
-class AddToCart extends StatelessWidget {
-  const AddToCart({
+class AddToBuy extends StatelessWidget {
+  const AddToBuy({
     Key key,
     @required this.product,
   }) : super(key: key);
@@ -32,7 +32,7 @@ class AddToCart extends StatelessWidget {
                ),
              color: product.color,
              onPressed: (){
-
+               
              },
              child: Text("Comprar".toUpperCase(),
                style: TextStyle(

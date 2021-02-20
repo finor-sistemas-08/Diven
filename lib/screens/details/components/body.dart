@@ -3,7 +3,7 @@ import 'package:diven_market/models/producto.dart';
 import 'package:diven_market/screens/details/components/product_title_with_image.dart';
 import 'package:flutter/material.dart';
 
-import 'add_to_cart.dart';
+import 'buy.dart';
 import 'color_and_marca.dart';
 import 'description.dart';
 
@@ -46,7 +46,7 @@ class Body extends StatelessWidget {
                     children: <Widget> [
                       EstadoAndMarca(product: product),
                       Description(product: product),                                            
-                      AddToCart(product: product),
+                      AddToBuy(product: product),
                     ],
                   ),
                 ),                

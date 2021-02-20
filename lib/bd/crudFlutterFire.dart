@@ -32,11 +32,11 @@ class CrudFirestore{
     return;
   }
 
-  Future<void> update() async {
+  Future<void> update(String coleccion, String documento) async {
     await Firebase.initializeApp();
-    CollectionReference ref = FirebaseFirestore.instance.collection('Users');
+    CollectionReference ref = FirebaseFirestore.instance.collection(coleccion);
     ref
-        .doc('1234')
+        .doc(documento)
         .update({"name": "test1"})
         .then((value) => print("Success"))
         .catchError((error) => print(error.toString()));

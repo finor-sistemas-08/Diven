@@ -1,4 +1,4 @@
-import 'package:diven_market/bd/operation.dart';
+import 'package:diven_market/bd/operation_persona.dart';
 import 'package:diven_market/models/persona.dart';
 
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class _ConsultarState extends State<Consultar> {
     Persona persona = ModalRoute.of(context).settings.arguments;
     //Operation.persona();
     _init(persona);
-
+    
     return WillPopScope(
       onWillPop: _onWillPopScope,
       child: Scaffold(
@@ -59,6 +59,7 @@ class _ConsultarState extends State<Consultar> {
   }
 
   Widget _bluidform(Persona persona) {
+    //bool sw = false;
     return Form(
         key: _formKey,
         child: Padding(
@@ -68,7 +69,7 @@ class _ConsultarState extends State<Consultar> {
               SizedBox(
                 height: 10,
               ),
-              
+
               TextFormField(
                 controller: nombreController,
                 validator: (value) {
@@ -211,11 +212,37 @@ class _ConsultarState extends State<Consultar> {
                         persona.genero = generoController.text;
                         persona.correo = correoController.text;
                         Operation.update(persona);
+                        //sw = true;
+                        //Acualizar en Firebase
+                        //ActualizarPersona("persona",);
+
+                      // ActualizarPersona(String coleccion, String documento) async {
+                      //   CollectionReference ref = FirebaseFirestore.instance.collection(coleccion);
+                      //   ref
+                      //       .doc(documento)
+                      //       .update({"name": "test1"})
+                      //       .then((value) => print("Success"))
+                      //       .catchError((error) => print(error.toString()));        
+                      // }
+                                        
+                                          
+                      // AñadirPersona(String idDoc) async {
+                      //   FirebaseFirestore.instance.collection('persona').doc(idDoc).set({
+                      //     "nombre" : nombreController.text,
+                      //     "paterno" : paternoController.text,
+                      //     "materno" : maternoController.text,
+                      //     "fecha_nac" : fechaNacController.text,
+                      //     "genero" : generoController.text,
+                      //     "correo" : correoController.text,
+                      //     }
+                      //   );
+                      // }
+                        
                       } else {
                         
                         //INSERCIÓN                        
                         //Para insertar a firebase
-                        FirebaseFirestore.instance.collection('persona').add({                          
+                        FirebaseFirestore.instance.collection('persona').add({                        
                           "nombre" : nombreController.text,
                           "paterno" : paternoController.text,
                           "materno" : maternoController.text,
@@ -224,7 +251,6 @@ class _ConsultarState extends State<Consultar> {
                           "correo" : correoController.text,
                           }
                         );
-                        
                         //Inserción en SQLite
                         Operation.insert(Persona(
                                 nombre: nombreController.text,
@@ -232,16 +258,19 @@ class _ConsultarState extends State<Consultar> {
                                 materno: maternoController.text,
                                 fechaNac: fechaNacController.text,
                                 genero: generoController.text,
-                                correo: correoController.text)
-                            //print("Guardar" + nombreController.text);
-                          );
+                                correo: correoController.text
+                        )//print("Guardar" + nombreController.text);
+                        );
+                      //sw = true;                                              
                       }
                     }
-                  })
-            ],
-          ),
-        ));
-  }
+                  }
+                )
+              ],
+            ),
+          )
+        );
+}
 
   Future<bool> _onWillPopScope() {
     return showDialog(
@@ -260,8 +289,8 @@ class _ConsultarState extends State<Consultar> {
                 ),
               ],
             ));
+    }
   }
-}
 
 //La clase que se encarga de consultas de la base de datos de firebase
 class ConsultaFirebase extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:diven_market/bd/operation.dart';
+import 'package:diven_market/bd/operation_persona.dart';
 import 'package:diven_market/models/persona.dart';
-import 'package:diven_market/pages/crud.dart';
+import 'package:diven_market/pages/add_persona.dart';
 
 import 'package:flutter/material.dart';
 
@@ -34,6 +34,7 @@ class __MyListState extends State<_MyList> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
           onPressed: (){
+            //INSERTAR - Cambia a la pantalla/vista donde se agregan usuarios
             Navigator.pushNamed(context, Consultar.ROUTE, arguments: Persona.empty()).then((value) => setState((){
               _loadData();
             }));
@@ -53,12 +54,12 @@ class __MyListState extends State<_MyList> {
         child: ListView.builder(
                 itemCount: persona.length,
                 itemBuilder: (_, i) => _createItem(i),
-              )       
+        )
       ),
-    );      
+    );
   }
 
-  //Carga datos de los usuarios
+  //CONSULTAR - Carga datos de los usuarios
   _loadData() async {
     List<Persona> auxNote = await Operation.persona();
     setState(() {
@@ -79,12 +80,16 @@ class __MyListState extends State<_MyList> {
           child: Icon(Icons.delete, color: Colors.white),
         ),
       ),
+      
+      //ELIMINAR - Dezplazamiento para eliminar un usuario
       onDismissed: (direction){
         print(direction);
         Operation.delete(persona[i]);
       },     
+
       child: ListTile(
         title: Text(persona[i].nombre),
+        //EDITAR - Botón de editar para modificar un usuario
         trailing: 
           MaterialButton(
             onPressed: (){

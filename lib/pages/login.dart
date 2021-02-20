@@ -1,13 +1,19 @@
 
-import 'package:diven_market/models/usuario.dart';
+// import 'package:diven_market/models/usuario.dart';
+// import 'package:diven_market/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:firebase_core/firebase_core.dart';
 
 //Las páginas o vistas que tendrá mi app
-import 'package:diven_market/pages/crear_cuenta.dart';
+import 'package:diven_market/pages/crear_admin.dart';
 //import 'package:diven_market/pages/consultas.dart';
 import 'package:diven_market/pages/principal.dart';
+
+final nameController = TextEditingController();
+final passwordController = TextEditingController();
+final mailController = TextEditingController();
+
 
 class Login extends StatefulWidget {
 
@@ -38,10 +44,14 @@ Widget cuerpo(BuildContext context) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           nombre(),
+          
           SizedBox(height: 7),
+          
           campoUsuario(),
           campoContrasena(),
+          
           SizedBox(height: 7),
+          
           botonEntrar(context),
           botonCrearCuenta(context),          
         ],
@@ -67,6 +77,7 @@ Widget campoUsuario(){
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 80, vertical: 3),
     child: TextField(
+      controller: nameController,
       decoration: InputDecoration(
         hintText: "Usuario",
         fillColor: Colors.white,
@@ -80,6 +91,7 @@ Widget campoContrasena(){
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 80, vertical: 3),
     child: TextField(
+        controller: passwordController,
         obscureText: true,
         decoration: InputDecoration(
         hintText: "Contraseña",
@@ -94,9 +106,15 @@ Widget botonEntrar(BuildContext context){
   return FlatButton(
     color: Colors.cyan[900],
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-    onPressed: (){
-      
+    onPressed: (){      
+      //Manda a la pantalla Principal administrativa donde se puede gestionar a los usuarios de la app y más cosas
       Navigator.pushNamed(context, Principal.ROUTE);
+
+      //AQUI VA LA LOGICA PARA VERIFICAR SI EL LOGIN ES CORRECTO
+
+      //Manda directo al menú principal de la app, una vista para el usuario promedio
+      //Navigator.pushNamed(context, HomeScreen.ROUTE);
+
     },
     child: Text("Entrar", style: TextStyle(fontSize: 18, color: Colors.white))
   );  
