@@ -6,15 +6,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 //import 'package:firebase_core/firebase_core.dart';
 
-class Consultar extends StatefulWidget {
+class AddPersona extends StatefulWidget {
   //const CrearCuenta({Key key}) : super(key: key);
   static const String ROUTE = "/Crud";
 
   @override
-  _ConsultarState createState() => _ConsultarState();
+  _AddPersonaState createState() => _AddPersonaState();
 }
 
-class _ConsultarState extends State<Consultar> {
+class _AddPersonaState extends State<AddPersona> {
   final _formKey = GlobalKey<FormState>();
 
   final nombreController = TextEditingController();

@@ -35,7 +35,7 @@ class __MyListState extends State<_MyList> {
         child: Icon(Icons.add),
           onPressed: (){
             //INSERTAR - Cambia a la pantalla/vista donde se agregan usuarios
-            Navigator.pushNamed(context, Consultar.ROUTE, arguments: Persona.empty()).then((value) => setState((){
+            Navigator.pushNamed(context, AddPersona.ROUTE, arguments: Persona.empty()).then((value) => setState((){
               _loadData();
             }));
           },
@@ -95,7 +95,7 @@ class __MyListState extends State<_MyList> {
             onPressed: (){
               Navigator.pushNamed(
                 context, 
-                Consultar.ROUTE, 
+                AddPersona.ROUTE, 
                 arguments: persona[i]).then((value) => setState((){
                   _loadData();
                 }));

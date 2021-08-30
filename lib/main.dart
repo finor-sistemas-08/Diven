@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
       initialRoute: "Login.ROUTE",
       routes: {
         Login.ROUTE : (_) => Login(),
-        CrearCuenta.ROUTE : (_) => CrearCuenta(),
-        '/Crud' : (_) => Consultar(),
+        CrearAdmin.ROUTE : (_) => CrearAdmin(),
+        '/Crud' : (_) => AddPersona(),
         '/Principal' : (_) => Principal(),
         '/Lista_users' : (_) => Listausuarios(),
         '/HomeScreen' : (_) => HomeScreen(),

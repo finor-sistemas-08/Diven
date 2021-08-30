@@ -125,7 +125,7 @@ Widget botonCrearCuenta(BuildContext context) {
     color: Colors.teal[700],
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
     onPressed: (){
-      Navigator.pushNamed(context, CrearCuenta.ROUTE);
+      Navigator.pushNamed(context, CrearAdmin.ROUTE);
       //Navigator.pushNamed(context, CrearCuenta.ROUTE, arguments: Usuario.empty()).then((value) => setState((){
         
       // }));

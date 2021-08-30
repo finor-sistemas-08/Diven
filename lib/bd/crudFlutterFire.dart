@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 class CrudFirestore{ 
     
+  //Crear un documento en una colección de Firebase, ambos determinados por parámetro
   Future<void> create(String coleccion, Map<String,dynamic> documento) async {
     await Firebase.initializeApp();
     CollectionReference ref = FirebaseFirestore.instance.collection(coleccion);
@@ -12,6 +13,13 @@ class CrudFirestore{
     return;
   }
 
+  
+  Future<void> setUserData(String coleccion, Map<String, dynamic> documento) async{
+    await Firebase.initializeApp();
+    
+  }
+
+  //Leer datos de un documento de una colección determinada
   Future<void> read() async {
     await Firebase.initializeApp();
 

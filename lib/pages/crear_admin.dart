@@ -10,7 +10,7 @@ final nameController = TextEditingController();
 final passwordController = TextEditingController();
 final mailController = TextEditingController();
 
-class CrearCuenta extends StatelessWidget {
+class CrearAdmin extends StatelessWidget {
 
   //const CrearCuenta({Key key}) : super(key: key);  
   
